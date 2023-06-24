@@ -4,10 +4,10 @@ export function Post() {
   return (
     <article className={styles.post}>
       <header>
-        <div className={styles.auth}>
+        <div className={styles.author}>
           <img
             className={styles.avatar}
-            src="https://images.unsplash.com/photo-1556751003-a249a53dc9b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=40"
+            src="https://avatars.githubusercontent.com/u/35588487?v=4"
           />
           <div className={styles.authorInfo}>
             <strong>Valdielson Siqueira</strong>
@@ -28,7 +28,9 @@ export function Post() {
           <a href="">👉 jane.design/doctorcare</a>
         </p>
         <p>
-          <a href="">#novoprojeto #nlw #rocketseat</a>
+          <a href="">#novoprojeto</a>
+          <a href="">#nlw</a>
+          <a href="">#rocketseat</a>
         </p>
       </div>
     </article>
