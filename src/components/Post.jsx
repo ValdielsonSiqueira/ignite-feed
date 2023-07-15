@@ -1,22 +1,38 @@
+import { useState } from 'react'
 import { Avatar } from './Avatar';
 import { Comment } from './Comment';
 import styles from './Post.module.css';
 
-export function Post() {
+export function Post({ post: { author, content, publishedAt } }) {
+  const publishedDateFormatted = new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(publishedAt);
+
+  const [comments, setComments] = useState(['Muito bom! Parabéns!!!']);
+
+  function handlerNewComment() {
+    event.preventDefault();
+
+    const newCommentText = event.target.comment.value;
+
+    setComments([...comments, newCommentText])
+  }
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar
-            src="https://avatars.githubusercontent.com/u/35588487?v=4"
-          />
+          <Avatar src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Valdielson Siqueira</strong>
-            <span>Frontend Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
         <time title="22 de Junho às 19:43" dateTime="2023-06-22 19:43:30">
-          Publicado há 1h
+          {publishedDateFormatted}
         </time>
       </header>
       <div className={styles.content}>
@@ -34,18 +50,23 @@ export function Post() {
           <a href="">#rocketseat</a>
         </p>
       </div>
-      <form className={styles.commentForm}>
+      <form className={styles.commentForm} onSubmit={handlerNewComment}>
         <strong>Deixe seu feedback!</strong>
-        <textarea placeholder="Deixe seu commentario"/>
+        <textarea name="comment" placeholder="Deixe seu commentario" />
         <footer>
           <button type="submit">Comentar</button>
         </footer>
       </form>
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {
+          comments.map(comment => (
+            <Comment
+              key={comment}
+              content={comment} 
+              />
+            ))
+        }
       </div>
     </article>
-  );
+  )
 }
